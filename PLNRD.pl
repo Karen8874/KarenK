@@ -1,3 +1,5 @@
+/* Pasar a SWI-PROLOG*/
+
 /*Analizador de Lenguaje Natural basado en Maquina de Estados*/
 domains
 frase = string
@@ -15,21 +17,21 @@ procesar(symbol, symbol)
 purgar.
 start.
 goal:-
-/*cargar un pequeño vocabulario*/
+/*cargar un pequeÃ±o vocabulario*/
     assert(palabra(nombre, puerta)),
     assert(palabra(nombre, ventana)),
     assert(palabra(nombre, casa)),
-    assert(palabra(nombre, "niño")),
+    assert(palabra(nombre, "niÃ±o")),
     assert(palabra(verbo, tiene)),
     assert(palabra(verbo, corre)),
     assert(palabra(verbo, juega)),
     assert(palabra(adjetivo, alto)),
     assert(palabra(adjetivo, alta)),
-    assert(palabra(adverbio, rápidamente)),
-    assert(palabra(artículo, el)),
-    assert(palabra(artículo, la)),
-    assert(palabra(artículo, un)),
-    assert(palabra(preposición, hacia)).
+    assert(palabra(adverbio, rÃ¡pidamente)),
+    assert(palabra(artÃ­culo, el)),
+    assert(palabra(artÃ­culo, la)),
+    assert(palabra(artÃ­culo, un)),
+    assert(palabra(preposiciÃ³n, hacia)).
 clauses
 
 /*analizar la frase*/
@@ -52,14 +54,14 @@ analizar(S):-
 predicado_nominal(S,S2,NP):- /*no adjetivo*/
     siguiente_palabra(S,S1,W),
     palabra(articulo,W),
-    añadir(W,[],T),
+    aÃ±adir(W,[],T),
     siguiente_palabra(S1,S2,W2),
     palabra(nombre,W2),
     juntar(T,[W2],NP).
 predicado_nominal(S,S3,NP):- /*sin adjetivo*/
     siguiente_palabra(S,S1,W),
     palabra(articulo,W),
-    añadir(W,[],T),
+    aÃ±adir(W,[],T),
     siguiente_palabra(S1,S2,W2),
     palabra(adjetivo,W2),
     juntar(T,[W2],T2),
@@ -89,12 +91,12 @@ predicado_verbal(S,S2,VP):- /*solo verbo + adverbio*/
     palabra(verbo,W),
     siguiente_palabra(S1,S2,A),
     palabra(adverbio,A),
-    añadir(W,[],T),
+    aÃ±adir(W,[],T),
     juntar(T,[A],VP).
 predicado_verbal(S,S2,VP):- /*solo verbo*/
     siguiente_palabra(S,S2,W),
     palabra(verbo,W),
-    añadir(W,[],VP).
+    aÃ±adir(W,[],VP).
 
 /*encontrar punto*/
 terminador(S):-
@@ -120,8 +122,8 @@ quitar_espacios(S,S2):-
     Ch=' '.
 quitar_espacios(S,S).
 
-/*añadir un symbol a una lista*/
-añadir(X,L,[X|L]).
+/*aÃ±adir un symbol a una lista*/
+aÃ±adir(X,L,[X|L]).
 
 juntar([],List,List).
 juntar([X|L1],List2,[X|L3]):-
